@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SahamYES - Portofolio</title>
+    <!-- Bootstrap 5 CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <!-- CSS Global -->
+    <link rel="stylesheet" href="global.css">
+    
+    <style>
+        /* CSS Khusus Halaman Portofolio */
+        
+        /* Candlestick Mockup */
+        .candle-track {
+            width: 30px;
+            height: 150px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            margin: 0 auto;
+        }
+        .candle-wick {
+            width: 2px;
+            height: 100%;
+            background-color: #444;
+            position: absolute;
+            z-index: 1;
+        }
+        .candle-wick.green { background-color: var(--accent); }
+        .candle-wick.red { background-color: var(--red); }
+        
+        .candle-body {
+            width: 12px;
+            border-radius: 2px;
+            position: absolute;
+            z-index: 2;
+        }
+        .candle-body.green { background-color: var(--accent); box-shadow: 0 0 8px rgba(212,255,0,0.3); }
+        .candle-body.red { background-color: var(--red); box-shadow: 0 0 8px rgba(255,77,77,0.3); }
+
+        /* Filter Chips Timeframe */
+        .time-filter {
+            background-color: transparent;
+            color: var(--text-muted);
+            border: none;
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 4px 12px;
+            border-radius: 20px;
+            transition: 0.3s;
+        }
+        .time-filter.active {
+            background-color: var(--accent);
+            color: #000;
+        }
+
+        /* Border Accent Cards */
+        .card-border-accent {
+            border: 1px solid #2a2a2a;
+            border-bottom: 2px solid var(--accent);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar py-4 d-flex flex-column justify-content-between">
+        <div>
+            <div class="sidebar-logo">
+                <div class="logo-icon"><i class="bi bi-graph-up-arrow"></i></div>
+                <div>
+                    <h5 class="logo-text">SahamYES</h5>
+                    <small class="logo-subtext">PRO TERMINAL</small>
+                </div>
+            </div>
+            
+            <nav class="d-flex flex-column gap-1">
+                <a href="index.html" class="nav-item-custom"><i class="bi bi-grid-1x2"></i> Dashboard</a>
+                <!-- Aktif di Portofolio -->
+                <a href="portofolio.html" class="nav-item-custom active"><i class="bi bi-wallet2"></i> Portofolio</a>
+                <a href="saham.html" class="nav-item-custom"><i class="bi bi-graph-up"></i> Saham</a>
+                <a href="watchlist.html" class="nav-item-custom"><i class="bi bi-eye"></i> Watchlist</a>
+                <a href="analisis.html" class="nav-item-custom"><i class="bi bi-bar-chart"></i> Analisis</a>
+                <a href="ringkasan.html" class="nav-item-custom"><i class="bi bi-building"></i> Ringkasan Broker</a>
+            </nav>
+        </div>
+        
+        <div class="px-3">
+            <a href="pengaturan.html" class="nav-item-custom"><i class="bi bi-gear"></i> Pengaturan</a>
+        </div>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+        
+        <!-- HEADER -->
+        <header class="d-flex justify-content-between align-items-center p-4 border-bottom" style="border-color: var(--border-color)!important;">
+            <div class="search-bar-container">
+                <i class="bi bi-search"></i>
+                <input type="text" placeholder="Cari emiten, berita, atau aksi korporasi...">
+            </div>
+            <div class="d-flex align-items-center gap-4">
+                <i class="bi bi-bell text-muted fs-5" style="cursor:pointer;"></i>
+                <div class="d-flex align-items-center gap-2" style="cursor:pointer;">
+                    <span class="text-sm">Kevin</span>
+                    <img src="https://via.placeholder.com/32" alt="Profile" class="rounded-circle" width="32" height="32">
+                </div>
+            </div>
+        </header>
+
+        <!-- PORTOFOLIO BODY -->
+        <div class="p-4">
+            
+            <!-- TOP METRICS -->
+            <div class="row g-3 mb-4">
+                <!-- Total Portofolio -->
+                <div class="col-lg-6">
+                    <div class="card-custom h-100 d-flex flex-column justify-content-center">
+                        <div class="text-muted text-sm mb-2">Total Nilai Portofolio</div>
+                        <h2 class="fw-bold mb-3" style="font-size: 2.2rem;">Rp 1.452.880.000</h2>
+                        <div class="d-flex align-items-center gap-2 text-sm">
+                            <span class="badge-accent"><i class="bi bi-graph-up-arrow"></i> +12.4%</span>
+                            <span class="text-muted">vs Bulan Lalu</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Buying Power -->
+                <div class="col-lg-3">
+                    <div class="card-custom h-100 d-flex flex-column justify-content-center">
+                        <div class="text-muted text-sm mb-2">Buying Power</div>
+                        <h4 class="fw-bold mb-3">Rp 245.000.000</h4>
+                        <div class="text-xs text-accent fw-bold"><i class="bi bi-bank"></i> RDI Terhubung</div>
+                    </div>
+                </div>
+                <!-- Unrealized P/L -->
+                <div class="col-lg-3">
+                    <div class="card-custom h-100 d-flex flex-column justify-content-center">
+                        <div class="text-muted text-sm mb-2">Unrealized P/L</div>
+                        <h4 class="fw-bold text-accent mb-3">+Rp 158.420.000</h4>
+                        <div class="text-xs text-muted">All-time profit</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CHART SECTION -->
+            <div class="card-custom mb-4">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <div>
+                        <h5 class="fw-bold mb-1">Performa Portofolio</h5>
+                        <div class="text-muted text-sm">Pertumbuhan nilai aset 6 bulan terakhir</div>
+                    </div>
+                    <div class="bg-dark rounded-pill p-1 border" style="border-color: #2a2a2a!important;">
+                        <button class="time-filter">1W</button>
+                        <button class="time-filter">1M</button>
+                        <button class="time-filter active">6M</button>
+                        <button class="time-filter">YTD</button>
+                    </div>
+                </div>
+
+                <!-- Candlestick Mockup -->
+                <div class="d-flex justify-content-around align-items-end" style="height: 200px; padding-bottom: 20px;">
+                    <!-- JAN -->
+                    <div class="text-center">
+                        <div class="candle-track">
+                            <div class="candle-wick green" style="height: 60%; bottom: 10%;"></div>
+                            <div class="candle-body green" style="height: 30%; bottom: 20%;"></div>
+                        </div>
+                        <div class="text-muted text-xs mt-2">JAN</div>
+                    </div>
+                    <!-- FEB -->
+                    <div class="text-center">
+                        <div class="candle-track">
+                            <div class="candle-wick green" style="height: 70%; bottom: 30%;"></div>
+                            <div class="candle-body green" style="height: 40%; bottom: 40%;"></div>
+                        </div>
+                        <div class="text-muted text-xs mt-2">FEB</div>
+                    </div>
+                    <!-- MAR -->
+                    <div class="text-center">
+                        <div class="candle-track">
+                            <div class="candle-wick red" style="height: 50%; bottom: 25%;"></div>
+                            <div class="candle-body red" style="height: 25%; bottom: 30%;"></div>
+                        </div>
+                        <div class="text-muted text-xs mt-2">MAR</div>
+                    </div>
+                    <!-- APR -->
+                    <div class="text-center">
+                        <div class="candle-track">
+                            <div class="candle-wick green" style="height: 80%; bottom: 40%;"></div>
+                            <div class="candle-body green" style="height: 45%; bottom: 50%;"></div>
+                        </div>
+                        <div class="text-muted text-xs mt-2">APR</div>
+                    </div>
+                    <!-- MEI -->
+                    <div class="text-center">
+                        <div class="candle-track">
+                            <div class="candle-wick green" style="height: 60%; bottom: 40%;"></div>
+                            <div class="candle-body green" style="height: 35%; bottom: 50%;"></div>
+                        </div>
+                        <div class="text-muted text-xs mt-2">MEI</div>
+                    </div>
+                    <!-- JUN -->
+                    <div class="text-center">
+                        <div class="candle-track">
+                            <div class="candle-wick green" style="height: 90%; bottom: 30%;"></div>
+                            <div class="candle-body green" style="height: 60%; bottom: 45%;"></div>
+                        </div>
+                        <div class="text-accent fw-bold text-xs mt-2">JUN</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TABLE SECTION -->
+            <div class="card-custom mb-4">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h5 class="fw-bold mb-0">Kepemilikan Saham</h5>
+                    <div class="d-flex gap-3 text-sm text-muted">
+                        <span style="cursor:pointer;"><i class="bi bi-funnel"></i> Filter</span>
+                        <span style="cursor:pointer;"><i class="bi bi-download"></i> Export</span>
+                    </div>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table-dark-custom mb-0">
+                        <thead>
+                            <tr>
+                                <th>Saham</th>
+                                <th class="text-center">Lot</th>
+                                <th class="text-end">Average Price</th>
+                                <th class="text-end">Current Price</th>
+                                <th class="text-end">Profit/Loss</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- BBCA -->
+                            <tr>
+                                <td>
+                                    <div class="d-flex align-items-center gap-3">
+                                        <div class="bg-dark rounded px-2 py-1 text-xs fw-bold border" style="border-color:#333!important;">BBCA</div>
+                                        <div>
+                                            <div class="text-sm fw-bold">Bank Central Asia</div>
+                                            <div class="text-xs text-muted">Financials</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="text-center fw-medium">250</td>
+                                <td class="text-end fw-medium text-muted">Rp 8.950</td>
+                                <td class="text-end fw-bold">Rp 9.875</td>
+                                <td class="text-end">
+                                    <div class="text-accent fw-bold">+10.33%</div>
+                                    <div class="text-accent text-xs">+Rp 23.125.000</div>
+                                </td>
+                            </tr>
+                            <!-- TLKM -->
+                            <tr>
+                                <td>
+                                    <div class="d-flex align-items-center gap-3">
+                                        <div class="bg-dark rounded px-2 py-1 text-xs fw-bold border" style="border-color:#333!important;">TLKM</div>
+                                        <div>
+                                            <div class="text-sm fw-bold">Telkom Indonesia</div>
+                                            <div class="text-xs text-muted">Infrastructure</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="text-center fw-medium">1,200</td>
+                                <td class="text-end fw-medium text-muted">Rp 4.100</td>
+                                <td class="text-end fw-bold">Rp 4.020</td>
+                                <td class="text-end">
+                                    <div class="text-red fw-bold">-1.95%</div>
+                                    <div class="text-red text-xs">-Rp 9.600.000</div>
+                                </td>
+                            </tr>
+                            <!-- GOTO -->
+                            <tr style="border-bottom: none;">
+                                <td>
+                                    <div class="d-flex align-items-center gap-3">
+                                        <div class="bg-dark rounded px-2 py-1 text-xs fw-bold border" style="border-color:#333!important;">GOTO</div>
+                                        <div>
+                                            <div class="text-sm fw-bold">GoTo Gojek Tokopedia</div>
+                                            <div class="text-xs text-muted">Technology</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="text-center fw-medium">15,000</td>
+                                <td class="text-end fw-medium text-muted">Rp 72</td>
+                                <td class="text-end fw-bold">Rp 88</td>
+                                <td class="text-end">
+                                    <div class="text-accent fw-bold">+22.22%</div>
+                                    <div class="text-accent text-xs">+Rp 24.000.000</div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="text-center mt-3 pt-3 border-top" style="border-color: #1f1f1f!important;">
+                    <a href="#" class="text-muted text-xs text-decoration-none fw-medium">Lihat Semua Kepemilikan (14 Emiten)</a>
+                </div>
+            </div>
+
+            <!-- BOTTOM METRICS -->
+            <div class="row g-3">
+                <div class="col-lg-4">
+                    <div class="card-custom card-border-accent h-100">
+                        <div class="text-muted text-sm mb-1">Dividen Terkumpul (YTD)</div>
+                        <h4 class="fw-bold mb-0">Rp 42.150.000</h4>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="card-custom card-border-accent h-100">
+                        <div class="text-muted text-sm mb-1">Yield Tahunan</div>
+                        <h4 class="fw-bold mb-0">6.82%</h4>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="card-custom card-border-accent h-100" style="border-bottom-color: #444!important;">
+                        <div class="text-muted text-sm mb-1">Beta Portofolio</div>
+                        <h4 class="fw-bold mb-0">0.92</h4>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- JAVASCRIPT BUAT INTERAKSI DOM -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Logic buat klik time-filter (1W, 1M, 6M, YTD)
+            const filters = document.querySelectorAll('.time-filter');
+            
+            filters.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    // Buang class active dari semua tombol
+                    filters.forEach(f => f.classList.remove('active'));
+                    // Tambahin active ke yang barusan di-klik
+                    this.classList.add('active');
+                });
+            });
+        });
+    </script>
+</body>
+</html>

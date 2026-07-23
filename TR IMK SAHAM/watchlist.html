@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SahamYES - Watchlist</title>
+    <!-- Bootstrap 5 CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <!-- CSS Global -->
+    <link rel="stylesheet" href="global.css">
+    
+    <style>
+        /* CSS Khusus Halaman Watchlist */
+        
+        /* Summary Cards */
+        .summary-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 20px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        /* Highlight Borders */
+        .card-highlight-green {
+            border: 1px solid var(--green) !important;
+            box-shadow: 0 0 15px rgba(0, 204, 102, 0.05);
+        }
+        .card-highlight-red {
+            border: 1px solid var(--red) !important;
+            box-shadow: 0 0 15px rgba(255, 77, 77, 0.05);
+        }
+
+        /* Filter Chips Customization */
+        .chip-filter {
+            background-color: transparent;
+            color: var(--text-muted);
+            border: none;
+            padding: 6px 16px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            border-radius: 8px;
+            transition: all 0.2s ease;
+        }
+        .chip-filter:hover {
+            color: var(--text-main);
+        }
+        .chip-filter.active {
+            background-color: var(--accent);
+            color: #000;
+        }
+
+        /* Initial Icons */
+        .icon-initial {
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1rem;
+            color: #fff;
+        }
+        .bg-blue { background-color: #0d6efd; }
+        .bg-red-icon { background-color: #dc3545; }
+        .bg-grey { background-color: #6c757d; }
+        .bg-green-icon { background-color: #198754; }
+
+        /* Persentase Badge */
+        .badge-pct-green {
+            background-color: rgba(0, 204, 102, 0.15);
+            color: var(--green);
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-weight: bold;
+            font-size: 0.85rem;
+        }
+        .badge-pct-red {
+            background-color: rgba(255, 77, 77, 0.15);
+            color: var(--red);
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-weight: bold;
+            font-size: 0.85rem;
+        }
+        .badge-pct-grey {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: var(--text-muted);
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-weight: bold;
+            font-size: 0.85rem;
+        }
+
+        /* Table Row Hover */
+        .table-row-hover {
+            transition: background-color 0.2s ease;
+            border-bottom: 1px solid #1f1f1f;
+        }
+        .table-row-hover:hover {
+            background-color: rgba(255, 255, 255, 0.02);
+        }
+        .table-row-hover:last-child {
+            border-bottom: none;
+        }
+
+        /* SVG Sparklines Base */
+        .sparkline {
+            width: 80px;
+            height: 30px;
+        }
+
+        /* Alert Bottom Card */
+        .alert-card {
+            background-color: #111111;
+            border: 1px solid #222;
+            border-radius: 12px;
+            padding: 24px;
+        }
+        
+        /* Button Beli Sidebar */
+        .btn-beli-sidebar {
+            background-color: var(--accent);
+            color: #000;
+            font-weight: bold;
+            border-radius: 8px;
+            border: none;
+            padding: 10px;
+            width: 100%;
+            transition: 0.2s;
+        }
+        .btn-beli-sidebar:hover {
+            background-color: #b3e600;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar py-4 d-flex flex-column justify-content-between">
+        <div class="px-3">
+            <div class="sidebar-logo">
+                <div class="logo-icon"><i class="bi bi-graph-up-arrow"></i></div>
+                <div>
+                    <h5 class="logo-text">SahamYES</h5>
+                    <small class="logo-subtext">PRO TERMINAL</small>
+                </div>
+            </div>
+            
+            <nav class="d-flex flex-column gap-1">
+                <a href="index.html" class="nav-item-custom"><i class="bi bi-grid-1x2"></i> Dashboard</a>
+                <a href="portofolio.html" class="nav-item-custom"><i class="bi bi-wallet2"></i> Portofolio</a>
+                <a href="saham.html" class="nav-item-custom"><i class="bi bi-graph-up"></i> Saham</a>
+                <!-- Aktif di Watchlist -->
+                <a href="watchlist.html" class="nav-item-custom active"><i class="bi bi-eye"></i> Watchlist</a>
+                <a href="analisis.html" class="nav-item-custom"><i class="bi bi-bar-chart"></i> Analisis</a>
+                <a href="ringkasan.html" class="nav-item-custom"><i class="bi bi-building"></i> Ringkasan Broker</a>
+            </nav>
+        </div>
+        
+        <div class="px-4 mt-auto mb-3">
+            <button class="btn-beli-sidebar mb-3"><i class="bi bi-plus-circle me-2"></i>Beli Saham</button>
+            <a href="pengaturan.html" class="nav-item-custom px-0"><i class="bi bi-gear"></i> Pengaturan</a>
+        </div>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+        
+        <!-- HEADER -->
+        <header class="d-flex justify-content-between align-items-center p-4 border-bottom" style="border-color: var(--border-color)!important;">
+            <div class="search-bar-container">
+                <i class="bi bi-search"></i>
+                <input type="text" placeholder="Cari saham, broker atau berita...">
+            </div>
+            <div class="d-flex align-items-center gap-4">
+                <i class="bi bi-bell text-muted fs-5" style="cursor:pointer;"></i>
+                <div class="d-flex align-items-center gap-2" style="cursor:pointer;">
+                    <div class="text-end">
+                        <div class="text-sm fw-bold">Kevin</div>
+                    </div>
+                    <img src="https://via.placeholder.com/32" alt="Profile" class="rounded-circle" width="32" height="32">
+                </div>
+            </div>
+        </header>
+
+        <!-- WATCHLIST BODY -->
+        <div class="p-4">
+            
+            <!-- TITLE -->
+            <div class="mb-4">
+                <h3 class="fw-bold mb-1">Daftar Pantauan SahamYES</h3>
+                <p class="text-muted text-sm">Pantau pergerakan saham favorit Anda dengan fokus dan tanpa distraksi</p>
+            </div>
+
+            <!-- SUMMARY CARDS -->
+            <div class="row g-3 mb-4">
+                <div class="col-md-3">
+                    <div class="summary-card">
+                        <div class="text-xs text-muted fw-bold mb-3">TOTAL PANTAUAN</div>
+                        <div class="d-flex justify-content-between align-items-end">
+                            <h2 class="fw-bold mb-0">25 <span class="text-sm text-muted fw-normal">Saham</span></h2>
+                            <i class="bi bi-journal-text text-muted fs-4"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="summary-card card-highlight-green">
+                        <div class="text-xs text-muted fw-bold mb-3">NAIK HARI INI</div>
+                        <div class="d-flex justify-content-between align-items-end">
+                            <h2 class="fw-bold text-accent mb-0">+15</h2>
+                            <i class="bi bi-graph-up-arrow text-accent fs-4"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="summary-card card-highlight-red">
+                        <div class="text-xs text-muted fw-bold mb-3">TURUN HARI INI</div>
+                        <div class="d-flex justify-content-between align-items-end">
+                            <h2 class="fw-bold text-red mb-0">-5</h2>
+                            <i class="bi bi-graph-down-arrow text-red fs-4"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="summary-card">
+                        <div class="text-xs text-muted fw-bold mb-3">NETRAL</div>
+                        <div class="d-flex justify-content-between align-items-end">
+                            <h2 class="fw-bold text-muted mb-0">5</h2>
+                            <i class="bi bi-dash text-muted fs-2" style="line-height: 0.5;"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FILTERS -->
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <div class="d-flex gap-1 bg-dark p-1 rounded-3" style="border: 1px solid #222;">
+                    <button class="chip-filter active">Semua</button>
+                    <button class="chip-filter">Naik</button>
+                    <button class="chip-filter">Turun</button>
+                    <button class="chip-filter">Top Gainer</button>
+                    <button class="chip-filter">Top Loser</button>
+                </div>
+                <div class="d-flex align-items-center gap-3">
+                    <div class="text-sm text-muted">
+                        <i class="bi bi-funnel"></i> Urutkan: <span class="text-white fw-medium">Popularitas</span>
+                    </div>
+                    <i class="bi bi-pencil-square text-muted" style="cursor:pointer;"></i>
+                </div>
+            </div>
+
+            <!-- TABLE -->
+            <div class="card-custom p-4 mb-4">
+                <div class="row text-xs text-muted fw-bold border-bottom pb-3 mb-2" style="border-color: #1f1f1f!important;">
+                    <div class="col-4">SAHAM</div>
+                    <div class="col-2 text-end">HARGA</div>
+                    <div class="col-2 text-center">PERUBAHAN</div>
+                    <div class="col-3 text-center">TREND 7 HARI</div>
+                    <div class="col-1 text-end">AKSI</div>
+                </div>
+
+                <!-- BBCA -->
+                <div class="row align-items-center table-row-hover py-3">
+                    <div class="col-4 d-flex align-items-center gap-3">
+                        <div class="icon-initial bg-blue">B</div>
+                        <div>
+                            <div class="fw-bold text-sm">BBCA</div>
+                            <div class="text-xs text-muted">Bank Central Asia Tbk.</div>
+                        </div>
+                    </div>
+                    <div class="col-2 text-end">
+                        <div class="fw-bold text-sm">Rp 10.425</div>
+                        <div class="text-xs text-muted" style="font-size: 0.7rem;">Open: 10.300</div>
+                    </div>
+                    <div class="col-2 text-center">
+                        <span class="badge-pct-green"><i class="bi bi-arrow-up-short"></i>+1,45%</span>
+                    </div>
+                    <div class="col-3 text-center">
+                        <!-- SVG Statis -->
+                        <svg class="sparkline" viewBox="0 0 100 30">
+                            <path d="M 0 25 Q 10 20, 20 22 T 40 18 T 60 20 T 80 5 T 100 15" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                    <div class="col-1 text-end">
+                        <i class="bi bi-three-dots-vertical text-muted" style="cursor:pointer;"></i>
+                    </div>
+                </div>
+
+                <!-- TLKM -->
+                <div class="row align-items-center table-row-hover py-3">
+                    <div class="col-4 d-flex align-items-center gap-3">
+                        <div class="icon-initial bg-red-icon">T</div>
+                        <div>
+                            <div class="fw-bold text-sm">TLKM</div>
+                            <div class="text-xs text-muted">Telkom Indonesia Tbk.</div>
+                        </div>
+                    </div>
+                    <div class="col-2 text-end">
+                        <div class="fw-bold text-sm">Rp 3.840</div>
+                        <div class="text-xs text-muted" style="font-size: 0.7rem;">Open: 3.860</div>
+                    </div>
+                    <div class="col-2 text-center">
+                        <span class="badge-pct-red"><i class="bi bi-arrow-down-short"></i>-0,52%</span>
+                    </div>
+                    <div class="col-3 text-center">
+                        <!-- SVG Statis -->
+                        <svg class="sparkline" viewBox="0 0 100 30">
+                            <path d="M 0 5 Q 10 10, 20 8 T 40 15 T 60 25 T 80 18 T 100 28" fill="none" stroke="var(--red)" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                    <div class="col-1 text-end">
+                        <i class="bi bi-three-dots-vertical text-muted" style="cursor:pointer;"></i>
+                    </div>
+                </div>
+
+                <!-- ASII -->
+                <div class="row align-items-center table-row-hover py-3">
+                    <div class="col-4 d-flex align-items-center gap-3">
+                        <div class="icon-initial bg-grey">A</div>
+                        <div>
+                            <div class="fw-bold text-sm">ASII</div>
+                            <div class="text-xs text-muted">Astra International Tbk.</div>
+                        </div>
+                    </div>
+                    <div class="col-2 text-end">
+                        <div class="fw-bold text-sm">Rp 5.200</div>
+                        <div class="text-xs text-muted" style="font-size: 0.7rem;">Open: 5.200</div>
+                    </div>
+                    <div class="col-2 text-center">
+                        <span class="badge-pct-grey">- 0,00%</span>
+                    </div>
+                    <div class="col-3 text-center">
+                        <!-- SVG Statis -->
+                        <svg class="sparkline" viewBox="0 0 100 30">
+                            <path d="M 0 15 L 100 15" fill="none" stroke="#6c757d" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                    <div class="col-1 text-end">
+                        <i class="bi bi-three-dots-vertical text-muted" style="cursor:pointer;"></i>
+                    </div>
+                </div>
+
+                <!-- GOTO -->
+                <div class="row align-items-center table-row-hover py-3">
+                    <div class="col-4 d-flex align-items-center gap-3">
+                        <div class="icon-initial bg-green-icon">G</div>
+                        <div>
+                            <div class="fw-bold text-sm">GOTO</div>
+                            <div class="text-xs text-muted">GoTo Gojek Tokopedia Tbk.</div>
+                        </div>
+                    </div>
+                    <div class="col-2 text-end">
+                        <div class="fw-bold text-sm">Rp 65</div>
+                        <div class="text-xs text-muted" style="font-size: 0.7rem;">Open: 66</div>
+                    </div>
+                    <div class="col-2 text-center">
+                        <span class="badge-pct-red"><i class="bi bi-arrow-down-short"></i>-4,41%</span>
+                    </div>
+                    <div class="col-3 text-center">
+                        <!-- SVG Statis -->
+                        <svg class="sparkline" viewBox="0 0 100 30">
+                            <path d="M 0 10 Q 20 10, 30 15 T 60 25 T 80 28 T 100 25" fill="none" stroke="var(--red)" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                    <div class="col-1 text-end">
+                        <i class="bi bi-three-dots-vertical text-muted" style="cursor:pointer;"></i>
+                    </div>
+                </div>
+
+                <div class="text-center mt-3 pt-3">
+                    <a href="#" class="text-accent text-xs text-decoration-none fw-bold">Lihat 21 Saham Lainnya</a>
+                </div>
+            </div>
+
+            <!-- ALERT SETTINGS -->
+            <div class="alert-card d-flex justify-content-between align-items-center">
+                <div style="max-width: 60%;">
+                    <h5 class="fw-bold mb-2 text-accent"><i class="bi bi-gear-fill me-2"></i>Pengaturan Alert Harga</h5>
+                    <p class="text-muted text-sm mb-0" style="line-height: 1.5;">Jangan biarkan momentum terlewat. Atur notifikasi real-time untuk target harga beli atau jual saham favorit Anda. Kami akan memberitahu Anda secara instan saat harga tercapai.</p>
+                </div>
+                <div class="d-flex flex-column gap-2" style="width: 200px;">
+                    <button class="btn btn-beli-sidebar"><i class="bi bi-bell-fill me-2"></i>Tambah Alert Baru</button>
+                    <button class="btn btn-dark text-white fw-bold" style="background-color: #222; border: 1px solid #333;">Riwayat Notifikasi</button>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- JS Interaction -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Logic klik filter
+            const chips = document.querySelectorAll('.chip-filter');
+            chips.forEach(chip => {
+                chip.addEventListener('click', function() {
+                    chips.forEach(c => c.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+        });
+    </script>
+</body>
+</html>

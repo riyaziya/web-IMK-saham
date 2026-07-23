@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SahamYES - Menu Saham</title>
+    <!-- Bootstrap 5 CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <!-- CSS Global -->
+    <link rel="stylesheet" href="global.css">
+    
+    <style>
+        /* CSS Khusus Halaman Saham */
+        
+        /* Banner Gradient */
+        .banner-saham {
+            background: linear-gradient(135deg, rgba(204, 255, 0, 0.15) 0%, var(--bg-card) 50%);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 30px;
+        }
+
+        /* Stock Cards */
+        .stock-card {
+            background-color: #1a1a1c;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 20px;
+            transition: 0.2s ease;
+        }
+        .stock-card:hover {
+            border-color: #444;
+            transform: translateY(-2px);
+        }
+
+        /* Buttons Custom */
+        .btn-buy-white {
+            background-color: #ffffff;
+            color: #000000;
+            font-weight: 600;
+            border-radius: 8px;
+            padding: 6px 20px;
+            border: none;
+            font-size: 0.85rem;
+        }
+        .btn-buy-white:hover {
+            background-color: #e0e0e0;
+        }
+        
+        .btn-buy-neon {
+            background-color: var(--accent);
+            color: #000000;
+            font-weight: 600;
+            border-radius: 8px;
+            padding: 6px 20px;
+            border: none;
+            font-size: 0.85rem;
+        }
+        .btn-buy-neon:hover {
+            background-color: #b3e600;
+        }
+
+        /* Badges */
+        .badge-trending {
+            background-color: rgba(204, 255, 0, 0.1);
+            color: var(--accent);
+            font-size: 0.65rem;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+        .badge-high {
+            background-color: rgba(204, 255, 0, 0.2);
+            color: var(--accent);
+            font-size: 0.65rem;
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+        .badge-stable {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            font-size: 0.65rem;
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+
+        /* Table Row Custom */
+        .dividen-row {
+            border-bottom: 1px solid #1f1f1f;
+            padding: 15px 0;
+        }
+        .dividen-row:last-child {
+            border-bottom: none;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar py-4 d-flex flex-column justify-content-between">
+        <div>
+            <div class="sidebar-logo">
+                <div class="logo-icon"><i class="bi bi-graph-up-arrow"></i></div>
+                <div>
+                    <h5 class="logo-text">SahamYES</h5>
+                    <small class="logo-subtext">PRO TERMINAL</small>
+                </div>
+            </div>
+            
+            <nav class="d-flex flex-column gap-1">
+                <a href="index.html" class="nav-item-custom"><i class="bi bi-grid-1x2"></i> Dashboard</a>
+                <a href="portofolio.html" class="nav-item-custom"><i class="bi bi-wallet2"></i> Portofolio</a>
+                <!-- Aktif di Saham -->
+                <a href="saham.html" class="nav-item-custom active"><i class="bi bi-graph-up"></i> Saham</a>
+                <a href="watchlist.html" class="nav-item-custom"><i class="bi bi-eye"></i> Watchlist</a>
+                <a href="analisis.html" class="nav-item-custom"><i class="bi bi-bar-chart"></i> Analisis</a>
+                <a href="ringkasan.html" class="nav-item-custom"><i class="bi bi-building"></i> Ringkasan Broker</a>
+            </nav>
+        </div>
+        
+        <div class="px-3">
+            <a href="pengaturan.html" class="nav-item-custom"><i class="bi bi-gear"></i> Pengaturan</a>
+        </div>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+        
+        <!-- HEADER -->
+        <header class="d-flex justify-content-between align-items-center p-4 border-bottom" style="border-color: var(--border-color)!important;">
+            <div class="search-bar-container">
+                <i class="bi bi-search"></i>
+                <input type="text" placeholder="Cari kode saham, emiten, atau indeks...">
+            </div>
+            <div class="d-flex align-items-center gap-4">
+                <i class="bi bi-bell text-muted fs-5" style="cursor:pointer;"></i>
+                <div class="d-flex align-items-center gap-2" style="cursor:pointer;">
+                    <div class="text-end">
+                        <div class="text-sm fw-bold">Kevin</div>
+                        <div class="text-xs text-muted">Premium Member</div>
+                    </div>
+                    <img src="https://via.placeholder.com/32" alt="Profile" class="rounded-circle" width="32" height="32">
+                </div>
+            </div>
+        </header>
+
+        <!-- SAHAM BODY -->
+        <div class="p-4">
+            
+            <!-- HERO BANNER -->
+            <div class="banner-saham d-flex justify-content-between align-items-center mb-5">
+                <div>
+                    <h2 class="fw-bold mb-2">Pasar Sedang Bergairah</h2>
+                    <p class="text-muted mb-0">IHSG naik +1.24% hari ini. Cek sektor perbankan dan energi<br>untuk dividen yang stabil.</p>
+                </div>
+                <div class="text-end">
+                    <h2 class="text-accent fw-bold mb-0">+1.24%</h2>
+                    <div class="text-xs text-muted fw-bold">IHSG TODAY</div>
+                </div>
+            </div>
+
+            <!-- SECTION: PALING BANYAK DIBELI -->
+            <div class="mb-5">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h5 class="fw-bold mb-0"><i class="bi bi-fire text-accent me-2"></i>Paling Banyak Dibeli</h5>
+                    <a href="#" class="text-accent text-sm text-decoration-none fw-medium">Lihat Semua &rsaquo;</a>
+                </div>
+                
+                <div class="row g-3">
+                    <!-- BBCA -->
+                    <div class="col-lg-3 col-md-6">
+                        <div class="stock-card d-flex flex-column h-100">
+                            <div class="d-flex justify-content-between align-items-start mb-3">
+                                <div class="bg-dark rounded p-2 border" style="border-color: #333!important;"><span class="text-xs fw-bold">BCA</span></div>
+                                <span class="badge-trending">TRENDING</span>
+                            </div>
+                            <h5 class="fw-bold mb-0">BBCA</h5>
+                            <div class="text-xs text-muted mb-4">Bank Central Asia Tbk.</div>
+                            
+                            <div class="mt-auto d-flex justify-content-between align-items-end">
+                                <div>
+                                    <div class="text-xs text-muted mb-1">HARGA</div>
+                                    <div class="fw-bold fs-5">9.850</div>
+                                    <div class="text-xs text-green">+3.1% (300)</div>
+                                </div>
+                                <button class="btn-buy-white btn-beli">Beli</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- TLKM -->
+                    <div class="col-lg-3 col-md-6">
+                        <div class="stock-card d-flex flex-column h-100">
+                            <div class="d-flex justify-content-between align-items-start mb-3">
+                                <div class="bg-dark rounded p-2 border" style="border-color: #333!important;"><span class="text-xs fw-bold text-danger">TLK</span></div>
+                            </div>
+                            <h5 class="fw-bold mb-0">TLKM</h5>
+                            <div class="text-xs text-muted mb-4">Telkom Indonesia Tbk.</div>
+                            
+                            <div class="mt-auto d-flex justify-content-between align-items-end">
+                                <div>
+                                    <div class="text-xs text-muted mb-1">HARGA</div>
+                                    <div class="fw-bold fs-5">3.920</div>
+                                    <div class="text-xs text-red">-0.7% (20)</div>
+                                </div>
+                                <button class="btn-buy-white btn-beli">Beli</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ADRO -->
+                    <div class="col-lg-3 col-md-6">
+                        <div class="stock-card d-flex flex-column h-100">
+                            <div class="d-flex justify-content-between align-items-start mb-3">
+                                <div class="bg-dark rounded p-2 border" style="border-color: #333!important;"><span class="text-xs fw-bold text-success">ADR</span></div>
+                            </div>
+                            <h5 class="fw-bold mb-0">ADRO</h5>
+                            <div class="text-xs text-muted mb-4">Adaro Energy Indonesia Tbk.</div>
+                            
+                            <div class="mt-auto d-flex justify-content-between align-items-end">
+                                <div>
+                                    <div class="text-xs text-muted mb-1">HARGA</div>
+                                    <div class="fw-bold fs-5">2.740</div>
+                                    <div class="text-xs text-green">+4.5% (120)</div>
+                                </div>
+                                <button class="btn-buy-white btn-beli">Beli</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- GOTO -->
+                    <div class="col-lg-3 col-md-6">
+                        <div class="stock-card d-flex flex-column h-100">
+                            <div class="d-flex justify-content-between align-items-start mb-3">
+                                <div class="bg-dark rounded p-2 border" style="border-color: #333!important;"><span class="text-xs fw-bold">GTO</span></div>
+                            </div>
+                            <h5 class="fw-bold mb-0">GOTO</h5>
+                            <div class="text-xs text-muted mb-4">GoTo Gojek Tokopedia Tbk.</div>
+                            
+                            <div class="mt-auto d-flex justify-content-between align-items-end">
+                                <div>
+                                    <div class="text-xs text-muted mb-1">HARGA</div>
+                                    <div class="fw-bold fs-5">64</div>
+                                    <div class="text-xs text-muted">0.0% (0)</div>
+                                </div>
+                                <button class="btn-buy-white btn-beli">Beli</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECTION: DIVIDEN GEDE -->
+            <div class="mb-5">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h5 class="fw-bold mb-0"><i class="bi bi-cash-coin text-accent me-2"></i>Dividen Gede</h5>
+                    <div class="d-flex gap-2">
+                        <button class="btn btn-dark border-secondary btn-sm"><i class="bi bi-funnel"></i></button>
+                        <button class="btn btn-dark border-secondary btn-sm"><i class="bi bi-sort-down"></i></button>
+                    </div>
+                </div>
+                
+                <div class="card-custom p-4">
+                    <!-- Header Table Flex -->
+                    <div class="row text-xs text-muted fw-bold border-bottom pb-3 mb-2" style="border-color: #1f1f1f!important;">
+                        <div class="col-4">SAHAM</div>
+                        <div class="col-3">HARGA TERAKHIR</div>
+                        <div class="col-3">DIVIDEND YIELD</div>
+                        <div class="col-2 text-end">AKSI</div>
+                    </div>
+
+                    <!-- Row ITMG -->
+                    <div class="row align-items-center dividen-row">
+                        <div class="col-4 d-flex align-items-center gap-3">
+                            <div class="bg-dark rounded p-2 text-xs fw-bold border text-center" style="border-color:#333!important; width: 40px;">IT</div>
+                            <div>
+                                <div class="fw-bold text-sm">ITMG</div>
+                                <div class="text-xs text-muted">Indo Tambangraya Megah Tbk.</div>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="fw-bold text-sm">25.425</div>
+                            <div class="text-xs text-green">+0.8%</div>
+                        </div>
+                        <div class="col-3 d-flex align-items-center gap-2">
+                            <div class="fw-bold text-accent">15.4%</div>
+                            <span class="badge-high">HIGH</span>
+                        </div>
+                        <div class="col-2 text-end">
+                            <button class="btn-buy-neon btn-beli">Beli</button>
+                        </div>
+                    </div>
+
+                    <!-- Row PTBA -->
+                    <div class="row align-items-center dividen-row">
+                        <div class="col-4 d-flex align-items-center gap-3">
+                            <div class="bg-dark rounded p-2 text-xs fw-bold border text-center" style="border-color:#333!important; width: 40px;">PT</div>
+                            <div>
+                                <div class="fw-bold text-sm">PTBA</div>
+                                <div class="text-xs text-muted">Bukit Asam Tbk.</div>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="fw-bold text-sm">2.410</div>
+                            <div class="text-xs text-red">-1.2%</div>
+                        </div>
+                        <div class="col-3 d-flex align-items-center gap-2">
+                            <div class="fw-bold text-accent">12.8%</div>
+                            <span class="badge-high">HIGH</span>
+                        </div>
+                        <div class="col-2 text-end">
+                            <button class="btn-buy-neon btn-beli">Beli</button>
+                        </div>
+                    </div>
+
+                    <!-- Row ASII -->
+                    <div class="row align-items-center dividen-row">
+                        <div class="col-4 d-flex align-items-center gap-3">
+                            <div class="bg-dark rounded p-2 text-xs fw-bold border text-center" style="border-color:#333!important; width: 40px;">AS</div>
+                            <div>
+                                <div class="fw-bold text-sm">ASII</div>
+                                <div class="text-xs text-muted">Astra International Tbk.</div>
+                            </div>
+                        </div>
+                        <div class="col-3">
+                            <div class="fw-bold text-sm">5.125</div>
+                            <div class="text-xs text-green">+1.5%</div>
+                        </div>
+                        <div class="col-3 d-flex align-items-center gap-2">
+                            <div class="fw-bold text-accent">8.2%</div>
+                            <span class="badge-stable">STABLE</span>
+                        </div>
+                        <div class="col-2 text-end">
+                            <button class="btn-buy-neon btn-beli">Beli</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- BOTTOM SECTION -->
+            <div class="row g-3">
+                <div class="col-lg-8">
+                    <div class="card-custom h-100 d-flex flex-column justify-content-center p-4">
+                        <h5 class="fw-bold mb-2">Analisis AI: Sektor Perbankan</h5>
+                        <p class="text-muted text-sm mb-4">Kinerja kuartal ini diprediksi melampaui ekspektasi. Fokus pada emiten dengan NPL rendah untuk keamanan jangka panjang.</p>
+                        <div>
+                            <button class="btn btn-outline-light rounded-pill px-4 py-2 text-sm fw-medium border-secondary">Baca Laporan Lengkap</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="card-custom h-100 d-flex flex-column justify-content-center align-items-center text-center p-4" style="background-color: rgba(204, 255, 0, 0.05);">
+                        <i class="bi bi-shield-check text-accent fs-1 mb-2"></i>
+                        <h6 class="fw-bold mb-1">Akun Terverifikasi</h6>
+                        <p class="text-muted text-xs mb-0">Trading dengan aman bersama SahamYES Pro Terminal.</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- JS Interaction -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Logic klik tombol beli buat ngetes
+            const btnBeli = document.querySelectorAll('.btn-beli');
+            btnBeli.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    alert('Order Beli disiapkan! Fitur ini bakal nyambung ke backend API lu ntar.');
+                });
+            });
+        });
+    </script>
+</body>
+</html>

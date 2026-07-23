@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SahamYES - Profil</title>
+    <!-- Link Bootstrap 5 CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Link ke file CSS khusus profil -->
+    <link rel="stylesheet" href="profile.css">
+</head>
+<body class="bg-dark-custom text-white">
+    <div class="d-flex min-vh-100">
+        <!-- ============ SIDEBAR ============ -->
+        <div class="offcanvas-lg offcanvas-start sidebar" tabindex="-1" id="sidebarOffcanvas">
+            <div class="offcanvas-header d-lg-none">
+                <span class="brand mb-0">Saham<span class="yes">YES</span></span>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#sidebarOffcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body sidebar-body">
+                <div class="brand d-none d-lg-block">Saham<span class="yes">YES</span></div>
+                <nav class="nav-custom">
+                    <a href="index.html" class="nav-link-custom"><i class="bi bi-house-door-fill"></i> Home</a>
+                    <a href="portofolio.html" class="nav-link-custom"><i class="bi bi-briefcase"></i> Portofolio</a>
+                    <a href="#" class="nav-link-custom"><i class="bi bi-graph-up-arrow"></i> Saham</a>
+                    <a href="#" class="nav-link-custom"><i class="bi bi-star"></i> Watchlist</a>
+                    <a href="#" class="nav-link-custom"><i class="bi bi-bar-chart-line"></i> Analisis</a>
+                    <a href="#" class="nav-link-custom"><i class="bi bi-people"></i> Ringkasan Broker</a>
+                </nav>
+            </div>
+        </div>
+
+        <!-- Konten Utama -->
+        <main class="flex-grow-1 p-4 p-md-5 main-content-bg">
+            <!-- Topbar -->
+            <div class="topbar d-flex align-items-center flex-wrap mb-5">
+                <button class="icon-btn d-lg-none me-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebarOffcanvas">
+                    <i class="bi bi-list"></i>
+                </button>
+
+                <div class="search-wrap">
+                    <i class="bi bi-search"></i>
+                    <input type="text" placeholder="Cari saham, broker atau berita...">
+                </div>
+
+                <div class="d-flex align-items-center gap-3 ms-auto">
+                    <button class="icon-btn">
+                        <i class="bi bi-bell"></i><span class="notif-dot"></span>
+                    </button>
+                    <button class="icon-btn" title="Keluar">
+                        <i class="bi bi-box-arrow-right"></i>
+                    </button>
+                    <a href="profile.html" class="d-flex align-items-center gap-2 text-decoration-none text-white">
+                        <div class="avatar">K</div>
+                        <span class="fw-semibold d-none d-sm-inline">Kevin</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Judul Pengaturan -->
+            <div class="mb-4">
+                <h2 class="fw-bold mb-1">Pengaturan Akun SahamYES</h2>
+                <p class="text-secondary">Atur akunmu biar makin nyaman</p>
+            </div>
+
+            <!-- Tombol Pengaturan Besar -->
+            <div class="d-flex flex-column gap-3 mb-5">
+                <div class="setting-btn d-flex justify-content-between align-items-center p-3 rounded-4 border-neon">
+                    <div class="d-flex align-items-center gap-3">
+                        <span class="fs-3 text-neon">⚙️</span>
+                        <h4 class="mb-0 fw-semibold">Profil Saya</h4>
+                    </div>
+                    <div class="icon-box bg-neon text-dark rounded-3 d-flex justify-content-center align-items-center">
+                        <span class="fs-4">👤</span>
+                    </div>
+                </div>
+                <div class="setting-btn d-flex justify-content-between align-items-center p-3 rounded-4 border-neon">
+                    <div class="d-flex align-items-center gap-3">
+                        <span class="fs-3 text-neon">🔔</span>
+                        <h4 class="mb-0 fw-semibold">Keamanan</h4>
+                    </div>
+                    <div class="icon-box bg-neon text-dark rounded-3 d-flex justify-content-center align-items-center">
+                        <span class="fs-4">🛡️</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Grid Berita (Kabar Kurang Baik vs Kabar Baik) -->
+            <div class="row g-4 mb-5">
+                <!-- Kiri: Kurang Baik -->
+                <div class="col-md-6">
+                    <div class="news-card p-4 rounded-4 h-100">
+                        <span class="text-danger fw-bold small d-block mb-3">Kabar Kurang Baik</span>
+                        
+                        <div class="mb-3">
+                            <h6 class="fw-bold mb-1">Inflasi Indonesia Meningkat ke 4,33%</h6>
+                            <p class="text-secondary small mb-0">Inflasi Indonesia Meningkat ke 4,33% yang mana inflasi Indonesia Meningkat ke 4,33%.</p>
+                        </div>
+                        <div class="mb-3">
+                            <h6 class="fw-bold mb-1">Harga Minyak Dunia Terkoreksi</h6>
+                            <p class="text-secondary small mb-0">Harga Minyak Dunia terkoreksi menurunnya Minyak dunia terkoreksi.</p>
+                        </div>
+                        <div class="mb-4">
+                            <h6 class="fw-bold mb-1">Bursa Saham Asia Lesu</h6>
+                            <p class="text-secondary small mb-0">Bursa Saham Asia Lesu pada zona dan saham indonesia memerah lesu.</p>
+                        </div>
+                        
+                        <button class="btn btn-outline-light rounded-pill btn-sm px-4">Kabar Kurang Baik</button>
+                    </div>
+                </div>
+                
+                <!-- Kanan: Baik -->
+                <div class="col-md-6">
+                    <div class="news-card p-4 rounded-4 h-100">
+                        <span class="text-neon fw-bold small d-block mb-3">Kabar Baik</span>
+                        
+                        <div class="mb-3">
+                            <h6 class="fw-bold mb-1">Pertumbuhan Ekonomi Stabil di 5,1%</h6>
+                            <p class="text-secondary small mb-0">Pertumbuhan Ekonomi Stabil di 5,1% mempesatnya ekonomi stabil di 5,1%.</p>
+                        </div>
+                        <div class="mb-3">
+                            <h6 class="fw-bold mb-1">Investasi Asing Meningkat 15%</h6>
+                            <p class="text-secondary small mb-0">Investasi Asing Meningkat 15% mencerminkan meningkatnya IHSG.</p>
+                        </div>
+                        <div class="mb-4">
+                            <h6 class="fw-bold mb-1">Dividen Perbankan Diprediksi Naik</h6>
+                            <p class="text-secondary small mb-0">Dividen Perbankan Diprediksi Naik seiring membaiknya rasio. Dividen Perbankan diprediksi Naik.</p>
+                        </div>
+                        
+                        <button class="btn btn-outline-light rounded-pill btn-sm px-4">Kabar Baik</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Ringkasan Broker Cards -->
+            <h5 class="fw-bold mb-3">Ringkasan Broker</h5>
+            <div class="row g-3 mb-5">
+                <div class="col-md-5">
+                    <div class="broker-card p-4 rounded-4 h-100">
+                        <p class="text-secondary small mb-2">Total Nilai Saham Anda</p>
+                        <h3 class="fw-bold text-neon mb-2">Rp. 50.000.000,00</h3>
+                        <p class="text-secondary small mb-4">Total nilai saham Anda gabungan keseluruhan index.</p>
+                        <button class="btn bg-neon text-dark fw-bold rounded-pill btn-sm px-4">Ringkasan Broker</button>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="broker-card p-4 rounded-4 h-100">
+                        <p class="text-secondary small mb-2">Laba/Rugi</p>
+                        <h3 class="fw-bold mb-2">+ Rp 500,00</h3>
+                        <p class="text-secondary small mb-4">Laba/Rugi Hari ini peringatan bagi hari ini.</p>
+                        <button class="btn btn-outline-light rounded-pill btn-sm px-4">Laba/Rugi Saham Anda</button>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="broker-card p-4 rounded-4 h-100">
+                        <p class="text-secondary small mb-2">Status</p>
+                        <h3 class="fw-bold text-neon mb-2">+2.000,00</h3>
+                        <p class="text-secondary small mb-0">Kondisi emiten ada peluang pertumbuhan uang kedepannya.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tabel Ringkasan Broker -->
+            <h5 class="fw-bold mb-3">Ringkasan Broker</h5>
+            <div class="table-card p-4 rounded-4 mb-5">
+                <div class="table-responsive">
+                    <table class="table table-dark table-borderless align-middle mb-0 custom-table">
+                        <thead>
+                            <tr class="text-secondary small border-bottom border-secondary">
+                                <th scope="col" class="pb-3">Broker</th>
+                                <th scope="col" class="pb-3">Vol beli</th>
+                                <th scope="col" class="pb-3">Vol jual</th>
+                                <th scope="col" class="pb-3">Beli bersih</th>
+                                <th scope="col" class="pb-3 text-center">Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="border-bottom border-secondary">
+                                <td class="py-3">
+                                    <div class="d-flex align-items-center gap-2">
+                                        <div class="bg-white rounded-circle" style="width:24px; height:24px;"></div>
+                                        <span>Mandiri Sekuritas</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="small text-secondary">Vol beli</div>
+                                    <div class="fw-bold">10.000 lot</div>
+                                </td>
+                                <td>
+                                    <div class="small text-secondary">Vol jual</div>
+                                    <div class="fw-bold">8.000 lot</div>
+                                </td>
+                                <td>
+                                    <div class="small text-secondary">Beli bersih</div>
+                                    <div class="fw-bold text-neon">+2.000 lot</div>
+                                </td>
+                                <td class="text-center">
+                                    <span class="badge rounded-pill status-akumulasi px-3 py-2 fw-normal">Akumulasi</span>
+                                </td>
+                            </tr>
+                            <tr class="border-bottom border-secondary">
+                                <td class="py-3">
+                                    <div class="d-flex align-items-center gap-2">
+                                        <div class="bg-info rounded-circle" style="width:24px; height:24px;"></div>
+                                        <span>Ajaib Sekuritas</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="small text-secondary">Vol beli</div>
+                                    <div class="fw-bold">5.000 lot</div>
+                                </td>
+                                <td>
+                                    <div class="small text-secondary">Vol jual</div>
+                                    <div class="fw-bold">5.000 lot</div>
+                                </td>
+                                <td>
+                                    <div class="small text-secondary">Beli bersih</div>
+                                    <div class="fw-bold text-secondary">0 lot</div>
+                                </td>
+                                <td class="text-center">
+                                    <span class="badge rounded-pill status-netral px-4 py-2 fw-normal text-white">Netral</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="py-3">
+                                    <div class="d-flex align-items-center gap-2">
+                                        <div class="bg-white rounded-circle" style="width:24px; height:24px;"></div>
+                                        <span>Mirae Asset</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="small text-secondary">Vol beli</div>
+                                    <div class="fw-bold">7.000 lot</div>
+                                </td>
+                                <td>
+                                    <div class="small text-secondary">Vol jual</div>
+                                    <div class="fw-bold">9.000 lot</div>
+                                </td>
+                                <td>
+                                    <div class="small text-secondary">Beli bersih</div>
+                                    <div class="fw-bold text-danger">-2.000 lot</div>
+                                </td>
+                                <td class="text-center">
+                                    <span class="badge rounded-pill status-distribusi px-3 py-2 fw-normal">Distribusi</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Script Bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

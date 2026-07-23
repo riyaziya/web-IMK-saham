@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SahamYES - Pengaturan Akun</title>
+    <!-- Bootstrap 5 CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <!-- CSS Global -->
+    <link rel="stylesheet" href="global.css">
+    
+    <style>
+        /* =========================================
+           CSS KHUSUS HALAMAN PENGATURAN
+           ========================================= */
+
+        .settings-card {
+            background-color: #161618;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 24px;
+            height: 100%;
+        }
+
+        /* Form Input Custom */
+        .form-control-dark, .form-select-dark {
+            background-color: #1a1a1c;
+            border: 1px solid #333;
+            color: #fff;
+            font-size: 0.85rem;
+            padding: 10px 15px;
+            border-radius: 8px;
+        }
+        .form-control-dark:focus, .form-select-dark:focus {
+            background-color: #1a1a1c;
+            border-color: var(--accent);
+            color: #fff;
+            box-shadow: 0 0 0 0.2rem rgba(204, 255, 0, 0.25);
+        }
+        .form-control-dark:disabled, .form-control-dark[readonly] {
+            background-color: #111;
+            color: #888;
+        }
+
+        /* Profile Image */
+        .profile-pic-container {
+            position: relative;
+            width: 80px;
+            height: 80px;
+        }
+        .profile-pic {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 2px solid #333;
+        }
+        .edit-badge {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            background-color: var(--accent);
+            color: #000;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            cursor: pointer;
+            border: 2px solid #161618;
+        }
+
+        /* Tombol Simpan */
+        .btn-save {
+            background-color: var(--accent);
+            color: #000;
+            font-weight: bold;
+            border-radius: 20px;
+            padding: 8px 24px;
+            border: none;
+            font-size: 0.85rem;
+        }
+
+        /* Keamanan Rows */
+        .security-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid #222;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .security-row:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+        .security-row:hover .bi-chevron-right {
+            color: var(--text-main) !important;
+        }
+
+        /* Custom Switch */
+        .form-switch .form-check-input {
+            width: 2.5em;
+            height: 1.25em;
+            background-color: #333;
+            border: none;
+            cursor: pointer;
+        }
+        .form-switch .form-check-input:checked {
+            background-color: var(--accent);
+        }
+        .form-switch .form-check-input:focus {
+            box-shadow: none;
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%23fff'/%3e%3c/svg%3e");
+        }
+
+        /* Custom Checkbox (Square) */
+        .custom-check .form-check-input {
+            background-color: transparent;
+            border: 2px solid #555;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .custom-check .form-check-input:checked {
+            background-color: var(--accent);
+            border-color: var(--accent);
+        }
+        .custom-check .form-check-input:focus {
+            box-shadow: none;
+        }
+
+        /* Theme Buttons */
+        .theme-btn {
+            background-color: #1a1a1c;
+            border: 1px solid #333;
+            color: var(--text-muted);
+            border-radius: 8px;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            width: 100%;
+            cursor: pointer;
+            transition: 0.2s;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+        .theme-btn.active {
+            border-color: var(--accent);
+            color: var(--accent);
+            background-color: rgba(204, 255, 0, 0.05);
+        }
+
+        /* Danger Zone */
+        .danger-zone {
+            background: linear-gradient(90deg, rgba(255, 77, 77, 0.05) 0%, transparent 100%);
+            border: 1px solid rgba(255, 77, 77, 0.2);
+            border-radius: 12px;
+            padding: 24px;
+        }
+        .btn-danger-outline {
+            background-color: transparent;
+            color: var(--red);
+            border: 1px solid var(--red);
+            padding: 8px 20px;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 0.85rem;
+            transition: 0.2s;
+        }
+        .btn-danger-outline:hover {
+            background-color: rgba(255, 77, 77, 0.1);
+        }
+
+        /* Sidebar Profile Button Active */
+        .sidebar-bottom-active {
+            background-color: var(--accent);
+            color: #000 !important;
+            border-radius: 8px;
+            font-weight: bold;
+        }
+        .sidebar-bottom-active i {
+            color: #000 !important;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar py-4 d-flex flex-column justify-content-between">
+        <div class="px-3">
+            <div class="sidebar-logo">
+                <div class="logo-icon"><i class="bi bi-graph-up-arrow"></i></div>
+                <div>
+                    <h5 class="logo-text">SahamYES</h5>
+                    <small class="logo-subtext">PRO TERMINAL</small>
+                </div>
+            </div>
+            
+            <nav class="d-flex flex-column gap-1 mb-4">
+                <a href="index.html" class="nav-item-custom"><i class="bi bi-grid-1x2"></i> Dashboard</a>
+                <a href="portofolio.html" class="nav-item-custom"><i class="bi bi-wallet2"></i> Portofolio</a>
+                <a href="saham.html" class="nav-item-custom"><i class="bi bi-graph-up"></i> Saham</a>
+                <a href="watchlist.html" class="nav-item-custom"><i class="bi bi-eye"></i> Watchlist</a>
+                <a href="analisis.html" class="nav-item-custom"><i class="bi bi-bar-chart"></i> Analisis</a>
+                <a href="ringkasan.html" class="nav-item-custom"><i class="bi bi-building"></i> Ringkasan Broker</a>
+            </nav>
+        </div>
+        
+        <div class="px-4 mt-auto">
+            <!-- Tombol Pengaturan Aktif -->
+            <a href="pengaturan.html" class="nav-item-custom px-3 mb-3 sidebar-bottom-active d-flex align-items-center gap-2">
+                <i class="bi bi-gear"></i> Pengaturan
+            </a>
+            
+            <!-- User Profile Mini -->
+            <div class="d-flex align-items-center gap-2 px-2 mt-3 cursor-pointer">
+                <img src="https://via.placeholder.com/32" alt="Kevin" class="rounded-circle" width="36" height="36">
+                <div>
+                    <div class="text-sm fw-bold text-white">Kevin</div>
+                    <div class="text-muted" style="font-size: 0.65rem;">Premium User</div>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+        
+        <!-- HEADER -->
+        <header class="d-flex justify-content-between align-items-center p-4 border-bottom" style="border-color: var(--border-color)!important;">
+            <div class="search-bar-container w-50">
+                <i class="bi bi-search"></i>
+                <input type="text" placeholder="Cari saham atau fitur...">
+            </div>
+            <div class="d-flex align-items-center gap-4">
+                <i class="bi bi-bell text-accent fs-5 position-relative cursor-pointer">
+                    <span class="position-absolute top-0 start-100 translate-middle p-1 bg-danger border border-light rounded-circle" style="width: 8px; height: 8px;"></span>
+                </i>
+                <i class="bi bi-person-circle text-muted fs-5 cursor-pointer"></i>
+            </div>
+        </header>
+
+        <!-- KONTEN PENGATURAN -->
+        <div class="p-4">
+            
+            <!-- TITLE -->
+            <div class="mb-4">
+                <h3 class="fw-bold mb-1">Pengaturan</h3>
+                <p class="text-muted text-sm">Kelola profil, keamanan, dan preferensi aplikasi Anda.</p>
+            </div>
+
+            <!-- ROW 1: Profil & Keamanan -->
+            <div class="row g-4 mb-4">
+                <!-- Profil Pengguna -->
+                <div class="col-lg-7">
+                    <div class="settings-card">
+                        <h6 class="fw-bold mb-4 text-white"><i class="bi bi-person-fill text-accent me-2"></i> Profil Pengguna</h6>
+                        
+                        <div class="d-flex gap-4">
+                            <!-- Avatar -->
+                            <div class="d-flex flex-column align-items-center gap-2">
+                                <div class="profile-pic-container">
+                                    <img src="https://via.placeholder.com/80" alt="Profile" class="profile-pic">
+                                    <div class="edit-badge"><i class="bi bi-pencil-fill"></i></div>
+                                </div>
+                                <div class="text-muted" style="font-size: 0.65rem;">Max 2MB, JPG atau PNG</div>
+                            </div>
+                            
+                            <!-- Forms -->
+                            <div class="flex-grow-1">
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        <label class="text-xs text-muted fw-bold mb-2">Nama Lengkap</label>
+                                        <input type="text" class="form-control form-control-dark" value="Kevin">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="text-xs text-muted fw-bold mb-2">Email</label>
+                                        <input type="email" class="form-control form-control-dark" value="kevin.invest@email.com" readonly>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="text-xs text-muted fw-bold mb-2">Nomor Telepon</label>
+                                        <input type="text" class="form-control form-control-dark" value="+62 812 3456 7890">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="text-xs text-muted fw-bold mb-2">ID Investor</label>
+                                        <div class="position-relative">
+                                            <input type="text" class="form-control form-control-dark pe-5" value="SY-882910" readonly>
+                                            <i class="bi bi-files position-absolute top-50 end-0 translate-middle-y me-3 text-muted cursor-pointer hover-white"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="text-end mt-4">
+                                    <button class="btn-save">Simpan Perubahan</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Keamanan -->
+                <div class="col-lg-5">
+                    <div class="settings-card">
+                        <h6 class="fw-bold mb-4 text-white"><i class="bi bi-shield-check text-accent me-2"></i> Keamanan</h6>
+                        
+                        <div class="security-row pt-0">
+                            <div>
+                                <div class="text-sm fw-bold text-white mb-1">Kata Sandi</div>
+                                <div class="text-muted" style="font-size: 0.7rem;">Terakhir diubah 3 bulan lalu</div>
+                            </div>
+                            <i class="bi bi-chevron-right text-muted"></i>
+                        </div>
+                        
+                        <div class="security-row">
+                            <div class="pe-3">
+                                <div class="text-sm fw-bold text-white mb-1">Autentikasi 2 Faktor (2FA)</div>
+                                <div class="text-muted" style="font-size: 0.7rem;">Gunakan aplikasi autentikator untuk lapisan keamanan tambahan.</div>
+                            </div>
+                            <div class="form-check form-switch m-0">
+                                <input class="form-check-input m-0" type="checkbox" checked>
+                            </div>
+                        </div>
+                        
+                        <div class="security-row pb-0">
+                            <div>
+                                <div class="text-sm fw-bold text-white mb-1">Perangkat Terhubung</div>
+                                <div class="text-muted" style="font-size: 0.7rem;">2 Perangkat aktif</div>
+                            </div>
+                            <i class="bi bi-chevron-right text-muted"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ROW 2: Notifikasi & Preferensi -->
+            <div class="row g-4 mb-4">
+                <!-- Notifikasi -->
+                <div class="col-lg-4">
+                    <div class="settings-card">
+                        <h6 class="fw-bold mb-4 text-white"><i class="bi bi-bell-fill text-accent me-2"></i> Notifikasi</h6>
+                        
+                        <div class="text-xs text-muted fw-bold mb-3" style="letter-spacing: 1px;">PERINGATAN HARGA</div>
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <span class="text-sm text-white">Push Notification</span>
+                            <div class="form-check custom-check">
+                                <input class="form-check-input" type="checkbox" checked>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <span class="text-sm text-white">Email Alert</span>
+                            <div class="form-check custom-check">
+                                <input class="form-check-input" type="checkbox">
+                            </div>
+                        </div>
+
+                        <div class="text-xs text-muted fw-bold mb-3 mt-4" style="letter-spacing: 1px;">AKTIVITAS AKUN</div>
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <span class="text-sm text-white">Laporan Mingguan</span>
+                            <div class="form-check custom-check">
+                                <input class="form-check-input" type="checkbox" checked>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span class="text-sm text-white">Tips Investasi</span>
+                            <div class="form-check custom-check">
+                                <input class="form-check-input" type="checkbox" checked>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Preferensi Aplikasi -->
+                <div class="col-lg-8">
+                    <div class="settings-card">
+                        <h6 class="fw-bold mb-4 text-white"><i class="bi bi-palette-fill text-accent me-2"></i> Preferensi Aplikasi</h6>
+                        
+                        <div class="row g-4">
+                            <div class="col-md-6">
+                                <label class="text-xs text-muted fw-bold mb-2">Bahasa (Language)</label>
+                                <select class="form-select form-select-dark mb-4 shadow-none">
+                                    <option selected>Bahasa Indonesia</option>
+                                    <option>English</option>
+                                </select>
+
+                                <label class="text-xs text-muted fw-bold mb-2">Mata Uang Tampilan</label>
+                                <select class="form-select form-select-dark shadow-none">
+                                    <option selected>IDR - Rupiah Indonesia</option>
+                                    <option>USD - US Dollar</option>
+                                </select>
+                            </div>
+                            
+                            <div class="col-md-6">
+                                <label class="text-xs text-muted fw-bold mb-2">Tema Aplikasi</label>
+                                <div class="d-flex gap-3">
+                                    <div class="theme-btn active" id="btn-dark-mode">
+                                        <i class="bi bi-moon-fill fs-4"></i>
+                                        Dark Mode
+                                    </div>
+                                    <div class="theme-btn" id="btn-light-mode">
+                                        <i class="bi bi-brightness-high fs-4"></i>
+                                        Light Mode
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- DANGER ZONE -->
+            <div class="danger-zone d-flex justify-content-between align-items-center">
+                <div>
+                    <h6 class="fw-bold text-red mb-2"><i class="bi bi-exclamation-triangle-fill me-2"></i> Zona Berbahaya</h6>
+                    <p class="text-muted text-sm mb-0" style="max-width: 80%;">Menghapus akun akan menghilangkan semua data investasi dan portofolio Anda secara permanen. Tindakan ini tidak dapat dibatalkan.</p>
+                </div>
+                <button class="btn-danger-outline">Hapus Akun</button>
+            </div>
+
+            <!-- FOOTER -->
+            <div class="text-center mt-5 mb-3 text-muted" style="font-size: 0.65rem;">
+                SahamYES v2.4.0 (Stable) - Built with Focus for Indonesian Investors
+            </div>
+
+        </div>
+    </main>
+
+    <!-- JS Interaction -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Logic Theme Selection (Visual Only for Demo)
+            const btnDark = document.getElementById('btn-dark-mode');
+            const btnLight = document.getElementById('btn-light-mode');
+
+            btnDark.addEventListener('click', () => {
+                btnDark.classList.add('active');
+                btnLight.classList.remove('active');
+            });
+
+            btnLight.addEventListener('click', () => {
+                btnLight.classList.add('active');
+                btnDark.classList.remove('active');
+            });
+        });
+    </script>
+</body>
+</html>
