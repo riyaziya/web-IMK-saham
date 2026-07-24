@@ -1,0 +1,334 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+    --bg-dark: #0a0a0a;
+    --bg-card: #151515;
+    --border-color: #2a2a2a;
+    
+    /* Warna teks diubah biar lebih terang & kontras */
+    --text-main: #ffffff; 
+    --text-muted: #aaaaaa; 
+    
+    --accent: #d4ff00; /* Neon yellow/green SahamYES */
+    --red: #ff4d4d;
+    --green: #00cc66;
+}
+
+body {
+    background-color: var(--bg-dark);
+    color: var(--text-main);
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+    overflow-x: hidden;
+}
+
+/* Scrollbar biar rapi */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-thumb { background: #333; border-radius: 10px; }
+
+/* Sidebar Layout */
+.sidebar {
+    width: 240px;
+    height: 100vh;
+    border-right: 1px solid var(--border-color);
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--bg-dark);
+    z-index: 1000;
+}
+
+.main-content {
+    margin-left: 240px;
+    min-height: 100vh;
+    background: radial-gradient(circle at top, rgba(212, 255, 0, 0.03) 0%, var(--bg-dark) 40%);
+}
+
+/* Nav Menu */
+.nav-item-custom {
+    color: var(--text-muted);
+    padding: 12px 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.9rem;
+    transition: 0.2s;
+    border-left: 3px solid transparent;
+}
+
+.nav-item-custom:hover {
+    color: var(--text-main);
+    background-color: rgba(255,255,255,0.05); /* Sedikit diterangin efek hovernya */
+}
+
+.nav-item-custom.active {
+    color: var(--accent);
+    border-left: 3px solid var(--accent);
+    background: linear-gradient(90deg, rgba(212, 255, 0, 0.05) 0%, transparent 100%);
+}
+
+/* Cards & Containers */
+.card-custom {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 20px;
+}
+
+/* Search Bar */
+.search-bar-container {
+    position: relative;
+    width: 350px;
+}
+.search-bar-container i {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-muted);
+}
+.search-bar-container input {
+    background-color: #1a1a1a;
+    border: 1px solid var(--border-color);
+    color: #ffffff; /* Teks dalam form putih bersih */
+    border-radius: 8px;
+    padding: 8px 15px 8px 40px;
+    width: 100%;
+    font-size: 0.85rem;
+}
+.search-bar-container input:focus {
+    outline: none;
+    border-color: #555;
+}
+.search-bar-container input::placeholder {
+    color: #888888; /* Placeholder nggak seputih teks isian */
+}
+
+/* Typography & Badges */
+.text-accent { color: var(--accent) !important; }
+.text-red { color: var(--red) !important; }
+.text-green { color: var(--green) !important; }
+.text-sm { font-size: 0.85rem; }
+.text-xs { font-size: 0.75rem; }
+.cursor-pointer { cursor: pointer; }
+
+/* PENTING: Bootstrap punya .text-muted bawaan yang warnanya abu-abu
+   GELAP (didesain buat background terang/putih) dan pake !important,
+   jadi nimpa apapun. Karena tema kita gelap, ini bikin HAMPIR SEMUA
+   teks/icon yang pake class text-muted (tombol "Lihat Semua", header
+   tabel "Average Price", icon lonceng notifikasi, label-label di
+   halaman Pengaturan, dst) jadi nyaris nggak keliatan. Override di
+   sini biar ikut warna abu-abu terang punya kita. */
+.text-muted {
+    color: var(--text-muted) !important;
+}
+
+.badge-accent {
+    background-color: rgba(212, 255, 0, 0.1);
+    color: var(--accent);
+    border: 1px solid rgba(212, 255, 0, 0.2);
+    border-radius: 50px;
+    padding: 4px 12px;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+/* Mockup Chart Bars (Statik buat UI) */
+.mock-chart {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    height: 140px;
+    padding: 20px 10px 0 10px;
+}
+.bar-track {
+    width: 2px;
+    background-color: #2a2a2a;
+    height: 100px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
+.bar-fill {
+    width: 6px;
+    border-radius: 3px;
+    position: absolute;
+}
+
+/* Insight Box */
+.insight-box {
+    border: 1px dashed #555;
+    border-radius: 8px;
+    padding: 15px;
+    background-color: rgba(255,255,255,0.02);
+}
+
+/* Tables */
+.table-dark-custom {
+    color: var(--text-main);
+    width: 100%;
+    font-size: 0.85rem;
+}
+.table-dark-custom th {
+    color: var(--text-muted);
+    font-weight: 500;
+    padding-bottom: 15px;
+    border-bottom: 1px solid var(--border-color);
+}
+.table-dark-custom td {
+    padding: 12px 0;
+    border-bottom: 1px solid #1f1f1f;
+    vertical-align: middle;
+    color: var(--text-main);
+}
+
+/* Tambahan fix teks hari & label chart biar nggak gelap */
+.mock-chart .text-muted, 
+.chart-main-area .text-muted,
+.text-xs {
+    color: #cccccc !important;
+}
+
+/* =========================================
+   TOAST NOTIFICATION SYSTEM
+   Sebelumnya #toast-stack, .app-toast, dan .chart-tooltip dibikin
+   lewat JS tapi nggak pernah didefinisikan CSS-nya sama sekali,
+   jadi toast muncul sbg teks polos tanpa background/posisi tetap,
+   numpuk di paling bawah <body> -- keliatan kayak "invisible" /
+   ketutupan konten lain. Ini fix-nya.
+   ========================================= */
+#toast-stack {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    z-index: 3000;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    pointer-events: none;
+}
+
+.app-toast {
+    background-color: #1c1c1c;
+    color: var(--text-main);
+    border: 1px solid var(--border-color);
+    border-left: 3px solid var(--accent);
+    border-radius: 8px;
+    padding: 12px 18px;
+    font-size: 0.85rem;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+    max-width: 340px;
+    opacity: 0;
+    transform: translateY(12px);
+    transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.app-toast.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.app-toast.toast-error {
+    border-left-color: var(--red);
+}
+
+/* Tooltip mock chart mingguan (Dashboard) */
+.chart-tooltip {
+    position: fixed;
+    background-color: #1c1c1c;
+    color: var(--text-main);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    padding: 6px 10px;
+    font-size: 0.75rem;
+    pointer-events: none;
+    opacity: 0;
+    z-index: 3000;
+    transition: opacity 0.15s ease;
+    white-space: nowrap;
+}
+
+.chart-tooltip.show {
+    opacity: 1;
+}
+
+/* =========================================
+   FORM INPUT DARK (dipake di Pengaturan & modal Beli/Jual Saham)
+   ========================================= */
+.form-control-dark, .form-select-dark {
+    background-color: #1a1a1c;
+    border: 1px solid #333;
+    color: #fff;
+    font-size: 0.85rem;
+    padding: 10px 15px;
+    border-radius: 8px;
+}
+.form-control-dark:focus, .form-select-dark:focus {
+    background-color: #1a1a1c;
+    border-color: var(--accent);
+    color: #fff;
+    box-shadow: 0 0 0 0.2rem rgba(204, 255, 0, 0.25);
+}
+.form-control-dark:disabled, .form-control-dark[readonly] {
+    background-color: #111;
+    color: #888;
+}
+
+/* =========================================
+   AVATAR INITIAL (dipake di header semua halaman - sebelumnya
+   class ini kepake di HTML tapi nggak pernah didefinisikan,
+   jadi teks inisial "K" muncul polos tanpa lingkaran/background
+   dan keliatan kayak "invisible" nempel di header)
+   ========================================= */
+.avatar-initial {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--accent);
+    color: #000;
+    font-weight: 700;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+/* Dipake di pengaturan.html buat icon copy ID Investor */
+.hover-white {
+    transition: 0.2s;
+}
+.hover-white:hover {
+    color: #fff !important;
+}
+
+/* =========================================
+   STANDAR LOGO SIDEBAR (biar konsisten di semua halaman)
+   ========================================= */
+.sidebar-logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0 16px;
+    margin-bottom: 2rem;
+}
+.sidebar-logo .logo-icon {
+    background-color: var(--accent);
+    color: #000;
+    border-radius: 6px;
+    padding: 6px 8px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.sidebar-logo .logo-text {
+    font-weight: bold;
+    color: #ffffff;
+    line-height: 1;
+    margin-bottom: 0;
+}
+.sidebar-logo .logo-subtext {
+    color: var(--text-muted);
+    font-size: 0.75rem;
+    letter-spacing: 1px;
+}

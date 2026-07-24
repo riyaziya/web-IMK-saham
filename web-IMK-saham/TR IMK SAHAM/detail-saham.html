@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SahamYES - Detail Saham</title>
+    <!-- Bootstrap 5 CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <!-- CSS Global -->
+    <link rel="stylesheet" href="global.css">
+
+    <style>
+        /* CSS Khusus Halaman Detail Saham */
+
+        .icon-initial-detail {
+            width: 52px;
+            height: 52px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            font-weight: bold;
+            background-color: var(--accent);
+            color: #000;
+        }
+
+        .badge-pct-green {
+            background-color: rgba(0, 204, 102, 0.15);
+            color: var(--green);
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-weight: bold;
+            font-size: 0.85rem;
+        }
+        .badge-pct-red {
+            background-color: rgba(255, 77, 77, 0.15);
+            color: var(--red);
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-weight: bold;
+            font-size: 0.85rem;
+        }
+        .badge-pct-grey {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: var(--text-muted);
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-weight: bold;
+            font-size: 0.85rem;
+        }
+
+        /* Tombol rentang waktu grafik */
+        .chip-range {
+            background-color: transparent;
+            color: var(--text-muted);
+            border: 1px solid #222;
+            padding: 4px 12px;
+            font-size: 0.78rem;
+            font-weight: 600;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+        }
+        .chip-range:hover {
+            color: var(--text-main);
+        }
+        .chip-range.active {
+            background-color: var(--accent);
+            color: #000;
+            border-color: var(--accent);
+        }
+
+        /* Order Book */
+        .ob-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 5px 10px;
+            font-size: 0.8rem;
+            border-radius: 4px;
+            margin-bottom: 3px;
+        }
+        .ob-header {
+            font-size: 0.7rem;
+            font-weight: bold;
+            letter-spacing: 0.03em;
+        }
+
+        /* Info Stat Box */
+        .stat-box {
+            background-color: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 12px 16px;
+        }
+
+        /* Panel Beli/Jual */
+        .order-tab-btn {
+            background-color: #1a1a1c;
+            border: 1px solid #333;
+            color: var(--text-muted);
+            font-weight: 600;
+            font-size: 0.85rem;
+            padding: 8px 0;
+        }
+        .order-tab-btn.active-beli {
+            background-color: var(--accent);
+            border-color: var(--accent);
+            color: #000;
+        }
+        .order-tab-btn.active-jual {
+            background-color: var(--red);
+            border-color: var(--red);
+            color: #fff;
+        }
+        .order-lot-btn {
+            background-color: #1a1a1c;
+            border: 1px solid #333;
+            color: #fff;
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            line-height: 1;
+        }
+        .order-lot-btn:hover {
+            border-color: var(--accent);
+        }
+        .order-summary-box {
+            background-color: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 16px;
+        }
+        .btn-buy-neon {
+            background-color: var(--accent);
+            color: #000000;
+            font-weight: 600;
+            border-radius: 8px;
+            padding: 10px 20px;
+            border: none;
+            font-size: 0.9rem;
+        }
+        .btn-buy-neon:hover {
+            background-color: #b3e600;
+            color: #000;
+        }
+        .panel-sticky {
+            position: sticky;
+            top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar py-4 d-flex flex-column justify-content-between">
+        <div class="px-3">
+            <div class="sidebar-logo">
+                <div class="logo-icon"><i class="bi bi-graph-up-arrow"></i></div>
+                <div>
+                    <h5 class="logo-text">SahamYES</h5>
+                    <small class="logo-subtext">PRO TERMINAL</small>
+                </div>
+            </div>
+
+            <nav class="d-flex flex-column gap-1">
+                <a href="index.html" class="nav-item-custom"><i class="bi bi-grid-1x2"></i> Dashboard</a>
+                <a href="portofolio.html" class="nav-item-custom"><i class="bi bi-wallet2"></i> Portofolio</a>
+                <a href="saham.html" class="nav-item-custom active"><i class="bi bi-graph-up"></i> Saham</a>
+                <a href="watchlist.html" class="nav-item-custom"><i class="bi bi-eye"></i> Watchlist</a>
+                <a href="analisis.html" class="nav-item-custom"><i class="bi bi-bar-chart"></i> Analisis</a>
+                <a href="ringkasan.html" class="nav-item-custom"><i class="bi bi-building"></i> Ringkasan Broker</a>
+            </nav>
+        </div>
+
+        <div class="px-3">
+            <a href="pengaturan.html" class="nav-item-custom"><i class="bi bi-gear"></i> Pengaturan</a>
+        </div>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+
+        <!-- HEADER -->
+        <header class="d-flex justify-content-between align-items-center p-4 border-bottom" style="border-color: var(--border-color)!important;">
+            <div class="search-bar-container">
+                <i class="bi bi-search"></i>
+                <input type="text" placeholder="Cari saham, broker atau berita...">
+            </div>
+            <div class="d-flex align-items-center gap-4">
+                <i class="bi bi-bell text-muted fs-5" style="cursor:pointer;"></i>
+                <div class="d-flex align-items-center gap-2" style="cursor:pointer;">
+                    <div class="text-end">
+                        <div class="text-sm fw-bold">Kevin</div>
+                    </div>
+                    <img src="https://via.placeholder.com/32" alt="Profile" class="rounded-circle" width="32" height="32">
+                </div>
+            </div>
+        </header>
+
+        <div class="p-4" id="detailMainContent">
+
+            <!-- BACK LINK -->
+            <a href="javascript:history.back()" class="text-muted text-sm text-decoration-none mb-3 d-inline-block">
+                <i class="bi bi-arrow-left me-1"></i>Kembali
+            </a>
+
+            <!-- HEADER SAHAM -->
+            <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mb-4">
+                <div class="d-flex align-items-center gap-3">
+                    <div class="icon-initial-detail" id="detailInitial">-</div>
+                    <div>
+                        <div class="d-flex align-items-center gap-2">
+                            <h4 class="fw-bold mb-0" id="detailKode">-</h4>
+                            <span class="badge-trending" id="detailSektor" style="background-color: rgba(255,255,255,0.08); color: var(--text-muted);">-</span>
+                        </div>
+                        <div class="text-sm text-muted" id="detailNama">-</div>
+                    </div>
+                </div>
+                <div class="text-end">
+                    <h2 class="fw-bold mb-1" id="detailHarga">-</h2>
+                    <span id="detailChangeBadge">-</span>
+                </div>
+            </div>
+
+            <!-- STAT BOXES -->
+            <div class="row g-3 mb-4">
+                <div class="col-6 col-md-3">
+                    <div class="stat-box">
+                        <div class="text-xs text-muted mb-1">HARGA PEMBUKAAN</div>
+                        <div class="fw-bold text-sm" id="detailOpen">-</div>
+                    </div>
+                </div>
+                <div class="col-6 col-md-3">
+                    <div class="stat-box">
+                        <div class="text-xs text-muted mb-1">LOT DIMILIKI</div>
+                        <div class="fw-bold text-sm" id="detailHoldingLot">0 Lot</div>
+                    </div>
+                </div>
+                <div class="col-6 col-md-3 d-none" id="detailYieldRow">
+                    <div class="stat-box">
+                        <div class="text-xs text-muted mb-1">DIVIDEND YIELD</div>
+                        <div class="fw-bold text-sm text-accent" id="detailYield">-</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- BODY: GRAFIK + ORDER BOOK (kiri) & PANEL BELI/JUAL (kanan) -->
+            <div class="row g-3">
+                <div class="col-lg-8">
+
+                    <!-- GRAFIK DETAIL -->
+                    <div class="card-custom p-4 mb-3">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h6 class="fw-bold mb-0"><i class="bi bi-graph-up text-accent me-2"></i>Grafik Harga</h6>
+                            <div class="d-flex gap-1">
+                                <button class="chip-range" data-range="1H">1H</button>
+                                <button class="chip-range active" data-range="1D">1D</button>
+                                <button class="chip-range" data-range="1M">1M</button>
+                                <button class="chip-range" data-range="1T">1T</button>
+                            </div>
+                        </div>
+                        <div id="detailChartBox"></div>
+                    </div>
+
+                    <!-- ORDER BOOK -->
+                    <div class="card-custom p-4">
+                        <h6 class="fw-bold mb-3"><i class="bi bi-list-columns text-accent me-2"></i>Order Book</h6>
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="ob-header text-red mb-2 text-center">JUAL (ASK)</div>
+                                <div id="askList"></div>
+                            </div>
+                            <div class="col-6">
+                                <div class="ob-header text-green mb-2 text-center">BELI (BID)</div>
+                                <div id="bidList"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- PANEL BELI / JUAL -->
+                <div class="col-lg-4">
+                    <div class="card-custom p-4 panel-sticky">
+                        <div class="d-flex gap-2 mb-4">
+                            <button type="button" class="order-tab-btn flex-fill rounded" data-tab="beli">Beli</button>
+                            <button type="button" class="order-tab-btn flex-fill rounded" data-tab="jual">Jual</button>
+                        </div>
+
+                        <div class="d-flex justify-content-between text-sm mb-2">
+                            <span class="text-muted">Harga per Lembar</span>
+                            <span class="fw-bold" id="panelHargaLembar">-</span>
+                        </div>
+                        <div class="d-flex justify-content-between text-sm mb-3">
+                            <span class="text-muted">Lot Dimiliki</span>
+                            <span class="fw-bold" id="panelHoldingLot">0 Lot</span>
+                        </div>
+
+                        <label class="text-xs text-muted fw-bold mb-2 d-block">Jumlah Lot (1 Lot = 100 Lembar)</label>
+                        <div class="d-flex align-items-center gap-2 mb-4">
+                            <button type="button" class="order-lot-btn" id="panelLotMinus">&minus;</button>
+                            <input type="number" class="form-control form-control-dark text-center" id="panelLotInput" value="1" min="1">
+                            <button type="button" class="order-lot-btn" id="panelLotPlus">&plus;</button>
+                        </div>
+
+                        <div class="order-summary-box mb-3">
+                            <div class="d-flex justify-content-between text-sm mb-2">
+                                <span class="text-muted">Total Lembar</span>
+                                <span id="panelTotalLembar">100</span>
+                            </div>
+                            <div class="d-flex justify-content-between text-sm mb-2">
+                                <span class="text-muted" id="panelFeeLabel">Estimasi Fee (0.15%)</span>
+                                <span id="panelFee">-</span>
+                            </div>
+                            <div class="d-flex justify-content-between fw-bold pt-2 border-top" style="border-color: var(--border-color)!important;">
+                                <span id="panelTotalLabel">Total Pembayaran</span>
+                                <span class="text-accent" id="panelTotalHarga">-</span>
+                            </div>
+                        </div>
+
+                        <div class="text-red text-xs mb-3 d-none" id="panelError"></div>
+
+                        <button type="button" class="btn-buy-neon w-100" id="panelSubmitBtn">Konfirmasi Beli</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Bootstrap Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- JS Global (dipake di semua halaman) -->
+    <script src="common.js"></script>
+    <!-- Sumber data mock saham -->
+    <script src="stock-data.js"></script>
+    <!-- JS Khusus Halaman Detail Saham -->
+    <script src="detail-saham.js"></script>
+</body>
+</html>
